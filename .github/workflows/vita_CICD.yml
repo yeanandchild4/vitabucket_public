@@ -1,0 +1,71 @@
+name: Deploy to Amazon EC2
+
+env:
+  PROJECT_NAME: "vitabucket_public"
+  BUCKET_NAME: "vita-s3"
+  CODE_DEPLOY_APP: "vita-codedeploy-app"
+  CODE_DEPLOY_DEPLOYMENT_GROUP: "vita-codedeploy-app-deployment-group"
+
+on:
+  push:
+    branches: [ "main" ]
+    
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'corretto'
+        cache: maven
+        
+    - name: Cache Maven packages
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+
+    - name: make yml
+      run: |
+        cd $PROJECT_NAME
+        echo "${{ secrets.APPLICATION_YML }}" | base64 --decode > src/main/resources/application.yml
+      shell: bash
+    
+    - name: Build with Maven
+      run: mvn clean package --file $PROJECT_NAME/pom.xml
+      
+    - name: rename and move ROOT
+      run: |
+        mv $PROJECT_NAME/target/*.war $PROJECT_NAME/target/ROOT.war
+        mv ./$PROJECT_NAME/target/ROOT.war ./
+      shell: bash
+
+    - name: Make zip file
+      run: zip -R $PROJECT_NAME.zip ./appspec.yml ./ROOT.war ./scripts/*
+      shell: bash
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+          
+    - name: Upload to AWS S3
+      run: aws s3 cp --region ap-northeast-2 ./$PROJECT_NAME.zip s3://$BUCKET_NAME/$GITHUB_SHA.zip
+          
+    - name: Deploy to AWS EC2 from S3
+      run: |
+        aws deploy create-deployment \
+          --application-name ${{ env.CODE_DEPLOY_APP }} \
+          --deployment-config-name CodeDeployDefault.AllAtOnce \
+          --deployment-group-name ${{ env.CODE_DEPLOY_DEPLOYMENT_GROUP }} \
+          --s3-location bucket=$BUCKET_NAME,key=$GITHUB_SHA.zip,bundleType=zip
