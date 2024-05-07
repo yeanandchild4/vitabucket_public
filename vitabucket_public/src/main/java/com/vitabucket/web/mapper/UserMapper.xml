@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vitabucket.web.mapper.UserMapper">
+
+	
+	
+	<insert id="signup" parameterType="com.vitabucket.web.dto.SignupDTO">
+		<selectKey keyProperty="unum" resultType="integer" order="BEFORE">
+        	SELECT SEQ_USER.NEXTVAL FROM DUAL
+    	</selectKey>
+		INSERT INTO vita_customer (unum, name, user_id, user_pwd, user_email, user_phone, user_birth,withdraw,user_authority) 
+		VALUES (#{unum}, #{name}, #{user_id}, #{user_pwd}, #{user_email},#{user_phone},#{birthday},'0','ROLE_USER')
+	</insert>
+	
+	<insert id="insertAddr" parameterType="com.vitabucket.web.dto.SignupDTO">
+	
+		INSERT INTO vita_address (addr_key, unum, addr_name, addr_zipcode, addr, addr_detail,addr_tel,addr_reference, whole_addr) 
+		VALUES (SEQ_ADDR.NEXTVAL, #{unum}, #{name}, #{addr_zipcode}, #{addr},#{addr_detail},#{user_phone},#{addr_reference}, #{whole_addr} )
+	</insert>
+
+	<insert id="SNSsignup" parameterType="com.vitabucket.web.dto.UserVO">
+		<selectKey keyProperty="unum" resultType="integer" order="BEFORE">
+        	SELECT SEQ_USER.NEXTVAL FROM DUAL
+    	</selectKey>
+		INSERT INTO vita_customer (unum, name,user_pwd,user_email,withdraw,user_authority,provider,provider_id) 
+		VALUES (#{unum}, #{name},#{user_pwd}, #{user_email},'0','ROLE_USER',#{provider},#{provider_id})
+	</insert>
+	
+	
+	<select id="getUserbyID" parameterType="String" resultType="com.vitabucket.web.dto.UserVO">
+		SELECT * FROM vita_customer WHERE user_id=#{user_id}
+	</select>
+
+	<select id="getUser" parameterType="String" resultType="com.vitabucket.web.dto.UserVO">
+		SELECT * FROM vita_customer WHERE user_email=#{user_email}
+	</select>
+	
+	<select id="emailcheck" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM vita_customer WHERE user_email=#{user_email}
+	</select>
+	
+	<select id="idckeck" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM vita_customer WHERE user_id=#{user_id}
+	</select>
+	
+	
+	<select id="login" parameterType="com.vitabucket.web.dto.UserVO" 
+	resultType="int">
+		SELECT COUNT(*) FROM vita_customer WHERE user_id=#{user_id} AND user_pwd=#{user_pwd}
+	</select>
+	
+	
+	<select id="idfind" parameterType="com.vitabucket.web.dto.UserVO"
+	resultType="com.vitabucket.web.dto.UserVO">
+		SELECT * FROM vita_customer WHERE name=#{name} AND user_email=#{user_email}
+	</select>
+	
+	<select id="pwdfind" parameterType="com.vitabucket.web.dto.UserVO"
+	resultType="com.vitabucket.web.dto.UserVO">
+		SELECT * FROM vita_customer WHERE user_id=#{user_id} AND user_email=#{user_email}
+	</select>
+	
+	<update id="editPwd" parameterType="String">
+		UPDATE vita_customer SET user_pwd=#{user_pwd} WHERE user_id=#{user_id}
+	</update>
+</mapper>

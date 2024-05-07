@@ -1,0 +1,119 @@
+/* 공통 */
+ul {
+    list-style: none;
+}
+.checkout_container * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.pro_info > img {
+    width: 130px;
+}
+
+.checkout_content > h3 {
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+/* 크기 지정 */
+.checkout_container {
+    width: 1200px;
+    margin: 0 auto;
+    margin-top: 10px;
+    min-height: 60vh;
+}
+
+.checkout_content {
+    border: 1px solid black;
+    padding: 1em;
+    margin-bottom: 10px;
+}
+
+/* 타이틀 */
+
+.title_container {
+    display: flex;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    font-size:17pt;
+}
+
+
+/* 구매 상품 목록 */
+.cart_Plist,.pro_info, .pro_info > div, .pro_cty {
+    display: flex;
+}
+
+.cart_Plist {
+    justify-content: space-between;
+}
+
+.cart_Plist {
+    padding: 1em 1em 1em 0;
+}
+
+.pro_info > div {
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1em;
+}
+
+.pro_cty > dt {
+    font-weight: bold;
+    width: 7em;
+}
+
+.pro_cty > dd {
+    width: 300px;
+}
+
+.pro_price > p {
+    font-weight: bold;
+}
+
+.pro_price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 주문자 정보, 배송정보 */
+.info_list label, .info_list span {
+    padding: 5px;
+}
+
+.info_list label {
+    display: inline-block;
+    width: 10em;
+    font-weight: bold;
+}
+
+/* 결제 수단 */
+.payment_part {
+    padding: 5px;
+}
+
+/* 버튼 */
+.bigBtn {
+    padding: 10px;
+    min_width: 160px;
+    height: 56px;
+    border-radius: 3px;
+    border: none;
+    background-color: #FfA500;
+    font-weight: bold;
+    color: white;
+    font-size: large;
+    cursor : pointer;
+}
+
+.payBtn {
+    margin: 20px;
+    text-align: center;
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vitabucket.web.mapper.Admin_memberMapper">
+	
+		<!-- 검색 -->    
+	<select id="mSearch" parameterType="HashMap" resultType="com.vitabucket.web.dto.UserVO">
+	    SELECT * FROM vita_customer 
+	    <where>   		
+	        <choose>
+	            <when test="search =='user_id'">
+	                AND user_id LIKE ('%'|| #{search_key} ||'%')
+	            </when>
+	            <when test="search =='name'">
+	                AND name LIKE ('%'|| #{search_key} ||'%')
+	            </when>
+	            <when test="search =='user_phone'">
+	                AND user_phone LIKE ('%'|| #{search_key} ||'%')
+	            </when>
+	            <when test="search =='provider'">
+	                AND provider LIKE ('%'|| #{search_key} ||'%')
+	            </when>
+	        </choose>   
+	    </where>		
+	</select>
+	
+
+</mapper>

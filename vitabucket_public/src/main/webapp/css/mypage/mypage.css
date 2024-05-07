@@ -1,0 +1,325 @@
+/* 공통적용 */
+
+.mypage_container * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.list_1 > img {
+    width: 130px;
+}
+
+/* 마이페이지 콘텐츠 공통*/
+
+.mypage_container {
+    display: flex;
+    width: 1200px;
+    margin: 0 auto;
+    min-height: 60vh;
+}
+
+.title_container {
+    display: flex;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    font-size:17pt;
+}
+
+.mypage_contents {
+    width: 960px;
+}
+
+
+/* 목록 공통 */
+
+.mypage_list , .mypage_list > ul, .list_li {
+    width: 100%;
+}
+
+.list_li {
+    border: 2px solid #FfA500;
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.list_1, .list_2, .list_1_1 {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+}
+
+.list_1 , .list_2 {
+    min-width: 0;
+}
+
+.list_1 {
+    flex-direction: row;
+}
+
+.list_1_1 > dl > dt {
+    font-weight: bold;
+}
+
+
+.list_2 {
+    min-width: 150px;
+    justify-content: space-between;
+    text-align: right;
+    margin-left:auto;
+}
+
+.list_1_1 {
+    min-width: 0;
+}
+
+.list_1_1 > dl > dt {
+    width: 7em;
+}
+
+.list_1_1 > dl > dd {
+    width: 300px;
+}
+
+.list_1_2 {
+    display: flex;
+}
+
+.list_1_2 > dd, .list_1_2 > span, .list_1_2 > p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* 마이페이지 메뉴 */
+
+.mypage_menu {
+    margin: 0 20px;
+}
+
+#menu_list > ul > li {
+    list-style: none;
+    background-color: white;
+    padding: 15px;
+}
+
+#menu_list {
+    font:bold 16px "malgun gothic";
+    width:200px;
+    text-align: center;
+}
+
+/* 모달 */
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal > .modal_content {
+    box-sizing: unset;
+    background-color: #fefefe;
+    margin: 5% auto; /* 15% from the top and centered */
+    padding: 40px;
+    border: 1px solid #888;
+    width: 650px;
+    max-width: none;
+    height: 70vh;
+    border-radius: 10px;
+    overflow: auto;
+}
+
+.modal_content > div {
+    width: 100%;
+
+}
+
+.modal_title {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.modal_title > h2 {
+    font-size: xx-large;
+    font-weight: normal;
+}
+
+.modal_title > span {
+    line-height: 10px;
+}
+
+.modal_date > p {
+    text-align: right;
+}
+
+.modal_pro_img {
+    display: flex;
+    border-top: 1px solid rgb(244, 244, 244);
+    border-bottom: 1px solid rgb(244, 244, 244);
+    padding: 10px;
+    margin-top: 22px;
+    font-weight: bold;
+}
+
+.modal_pro_img > img {
+    width: 72px;
+	height: 72px;
+}
+
+.modal_pro_img > span {
+    height: fit-content;
+	padding: 24px 1em;
+}
+
+.modal_body {
+    margin-top: 16px;
+    margin-bottom: 30px;
+}
+
+.modal_body > div {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.modal_body label {
+    display: inline-block;
+	width: 100px;
+	text-align: left;
+	padding-top: 12px;
+	padding-left: 10px;
+	font-weight: bold;
+}
+
+.modal_text_title > p {
+    height: 44px;
+    padding: 0px 11px 0px 15px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid rgb(221, 221, 221);
+    line-height: 44px;
+}
+
+.modal_text, .modal_comment, .modal_comment_content {
+    height: 250px;
+    width: 100%;
+}
+
+.modal_text textarea, .modal_comment textarea {
+    padding: 15px;
+    width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+	resize: none;
+    background-color: #fefefe;
+	border: 1px solid rgb(221, 221, 221);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+	font-size: 14px;
+}
+
+.modal_comment textarea {
+    border: none;
+}
+
+.modal_comment_content > p {
+    text-align: right;
+}
+
+.textLengthWrap {
+	width: fit-content;
+	height: fit-content;
+	justify-content: flex-end;
+	width: 100%;
+    margin: 5px 0;
+}
+
+.textLengthWrap p {
+	margin: 0;
+	color: #CECECE;
+}
+
+
+.modal_file label {
+    padding: 0;
+}
+
+.modal_file > input {
+    line-height: 33px;
+}
+
+.modal_btn {
+    text-align: center;
+}
+
+.close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.mdBtn {
+    cursor: pointer;
+}
+
+
+/* 버튼 공통*/
+
+.bigBtn {
+    width: 160px;
+    height: 56px;
+    border-radius: 3px;
+    border: none;
+    background-color: #FfA500;
+    font-weight: bold;
+    color: white;
+    font-size: large;
+    cursor : pointer;
+}
+
+/* 비활성 버튼 */
+.inactiveBtn {
+    color: darkgray;
+}
+
+/* 작성가능/작성한 리뷰버튼 */
+
+.title_container > a {
+    width: 40%;
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+    margin: 5px;
+}
+
+.reviewBtn {
+    margin-bottom: 20px;
+}
+

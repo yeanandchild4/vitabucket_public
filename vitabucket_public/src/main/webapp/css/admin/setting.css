@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+	/*menu부분 tab 선택한 것*/
+	.menu ul li:nth-child(6){background-color:#888;color:#fff;}
+	
+	
+	table{margin: 1em;}
+	input{width: 95%;padding: 0.3em;}
+	
+	
+	/*사업자 정보*/
+	.t1{width: 500px;text-align: center}
+	.t1 th{width: 25%;}
+	
+	
+	/*약관*/
+	.terms{display: none;}
+	.terms textarea{width: 600px;height: 300px;overflow-y: scroll;}
+	
+	/*약관목록*/
+	.terms_list{margin:1em}
+	.terms_list table{text-align: center;}
+	
+	/*약관 추가,수정*/
+	button[onclick="terms_add()"]{font-size: 1.4em;background-color:bisque;color: #555;font-weight: bolder;padding: 0.5em;}
+	button[onclick="terms_add()"]:hover{background-color:burlywood;color: #fff;}
+
+	.t_add, .t_edit{width: 750px;text-align: center;}
+	.t_add td, .t_edit td{text-align: left;}
+	.t_add tr:nth-child(1) td input, .t_edit tr:nth-child(1) td input{width: 3%;}
+	
+	
+	/*모바일 width:639px 미만*/
+	@media screen and (max-width:639px){
+		table{margin:5px}		
+		
+		.right{width: 100%;padding: 5px;}
+		.t1{margin:0 auto}
+		.terms_list {margin: 1em auto;width: 420px;}
+		.terms {margin: 0 auto;}
+		
+		.terms textarea{width: 450px;height: 200px;}
+		.t_add, .t_edit{width: 550px;}
+		.t_add th{width:10em;}
+		button[onclick="terms_add()"]{margin-left: 40%;}
+	}

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vitabucket.web.mapper.Admin_categoryMapper">
+
+	<!-- 카테고리 추가 -->
+	<insert id="cateAdd">
+		INSERT INTO VITA_SUB_CATEGORY(sub_cat_key,main_cat_key,sub_cat_name)
+		 VALUES(
+         	<choose>
+	           	<when test="main_cat_key == 1">		 
+					SEQ_SCATE_1.NEXTVAL
+			 	</when>
+	            <when test="main_cat_key == 2">	
+			 		SEQ_SCATE_2.NEXTVAL
+			 	</when>
+ 	            <when test="main_cat_key == 3">
+ 	            	SEQ_SCATE_3.NEXTVAL
+ 	            </when>
+	           	<when test="main_cat_key == 4">		 
+					SEQ_SCATE_4.NEXTVAL
+			 	</when>
+	            <when test="main_cat_key == 5">	
+			 		SEQ_SCATE_5.NEXTVAL
+			 	</when>
+ 	            <when test="main_cat_key == 6">
+ 	            	SEQ_SCATE_6.NEXTVAL
+ 	            </when>
+	           	<when test="main_cat_key == 7">		 
+					SEQ_SCATE_7.NEXTVAL
+			 	</when>
+	            <when test="main_cat_key == 8">	
+			 		SEQ_SCATE_8.NEXTVAL
+			 	</when>
+ 	            <when test="main_cat_key == 9">
+ 	            	SEQ_SCATE_9.NEXTVAL
+ 	            </when>
+	           	<when test="main_cat_key == 10">		 
+					SEQ_SCATE_10.NEXTVAL
+			 	</when>
+	            <when test="main_cat_key == 11">	
+			 		SEQ_SCATE_11.NEXTVAL
+			 	</when>
+	       </choose>
+	     	   ,#{main_cat_key},#{sub_cat_name}
+	 		)
+	</insert>	
+
+	
+	
+	
+</mapper>

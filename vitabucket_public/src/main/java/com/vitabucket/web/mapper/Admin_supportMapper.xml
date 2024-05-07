@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vitabucket.web.mapper.Admin_supportMapper">
+	
+	<!-- 문의목록 -->
+	<select id="inquiry_list">
+		SELECT b.*,p.pro_name,u.name,u.user_id 
+		FROM VITA_BOARD b INNER JOIN vita_product p 
+		ON b.pro_key=p.pro_key INNER JOIN vita_customer u 
+		ON b.unum=u.unum WHERE board_type='inquiry' ORDER BY board_key
+	</select>
+	
+	<!-- 리뷰목록 -->
+	<select id="review_list">
+	   SELECT b.*,p.pro_name,u.name,u.user_id 
+	   FROM VITA_BOARD b INNER JOIN vita_product p 
+	   ON b.pro_key=p.pro_key INNER JOIN vita_customer u 
+	   ON b.unum=u.unum WHERE board_type='review'
+	</select>
+
+	<!-- 추가 -->
+    <insert id="in_add" parameterType="com.vitabucket.web.dto.CommentDTO"> 
+      <selectKey keyProperty="comm_key" resultType="integer" order="BEFORE">
+          SELECT SEQ_IN_COMMENT.NEXTVAL FROM DUAL
+      </selectKey>
+		INSERT INTO VITA_COMMENT(comm_key,unum,board_key,comments,comm_date)
+		 VALUES(#{comm_key},#{unum},#{board_key},#{comments},SYSDATE)
+    </insert>
+    
+    <!-- 문의_상세_답변보기 -->
+	<select id="comment">
+		SELECT com.*,u.user_id,u.name 
+		FROM VITA_COMMENT com INNER JOIN VITA_CUSTOMER u 
+		ON com.unum=u.unum WHERE board_key=#{board_key}
+	</select>
+
+	
+	<!-- 리뷰상세보기 -->
+	<select id="review_detail">
+	   SELECT b.*,p.pro_name,u.name
+	   FROM VITA_BOARD b INNER JOIN vita_product p 
+	   ON b.pro_key=p.pro_key INNER JOIN vita_customer u 
+	   ON b.unum=u.unum WHERE board_type='review' AND board_key=#{board_key}
+	</select>
+    
+</mapper>

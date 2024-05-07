@@ -1,0 +1,91 @@
+@charset "UTF-8";
+	
+	/*menu부분 tab 선택한 것*/
+	.menu ul li:nth-child(5){background-color:#888;color:#fff;}
+	
+	
+	.right{display: flex;}
+	.t1 table,.t2 table{width:700px;text-align: center;}
+	
+	
+	/*문의 답변등록*/
+	.in_add{display: none;margin-top: 2em}
+	
+	/*문의*/
+	.inquiry{margin-left: 1em;padding-top: 5em;}
+	.inquiry,.review_detail{text-align: center;}
+	.inquiry button{margin-top: 1em;padding: 0.5em;font-size: 1.2em}
+	.inquiry table{width: 800px;height: 200px;margin: 0 auto;overflow-y: scroll;}
+	.inquiry table th{width: 3em}
+	.inquiry table td{text-align: left;padding: 1em;}
+	.inquiry p{padding: 1em;}
+	.inquiry p.com_commet{padding:0;}
+	
+	.inquiry label{font-weight: bold;color: cornflowerblue;}
+	.inquiry table div{padding: 0;}
+	.inquiry table div p{display: inline-block;}
+	.inquiry #comments{height: 100px;width:85%;}
+	
+	#in_comment{height: 300px;}
+	.inquiry_edit{height: 350px;}
+	#in_comment>div,#in_comment_edit{position: relative;}
+	.btn{position: absolute;bottom:-20%;right: 45%;}
+	
+	
+	/*목록에서 상품명 ...으로 생략하기*/
+	.pro_name{width:17em;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+	
+	
+	.t2{margin-top: 1em;}
+	.t2 table img{width: 100px;}
+	
+	
+	
+	/*리뷰상세보기*/
+	.review_detail{margin: 2em;}
+	.review_detail table{width: 700px;height: 200px;margin: 0 auto;}
+	.review_detail>button{margin-top: 1em;}
+	.review_detail th{width: 5em;}
+	.review_detail td[onclick]{color: #000;}
+	.review_detail td[onclick]:hover{cursor: pointer;background-color:beige;color: #888;}
+	.review_detail img{width: 300px;height:400px;}
+	
+	
+	/*리뷰보기 슬라이드바*/
+	.slideshow-container{position: relative;height:400px;}
+	.numbertext{color: #fff;}
+	.slid,.slid a{position:absolute; bottom: 1em;font-weight: bold;left: 300px;background: rgba(230,230,230,0.3);padding: 0.1em;}
+	.slid a:first-child{bottom: 150px;left: -7em;font-size: 2em; cursor: pointer;color:cornflowerblue;}
+	.slid a:last-child{bottom: 150px;left: 170px;font-size: 2em; cursor: pointer;color:cornflowerblue;}
+	
+	
+	/*-----------------------------------------*/
+
+
+	/*일반 태블릿 width:1024px 미만~ 640px 이상*/
+	@media screen and (min-width:640px) and (max-width:1023px){		
+		.right{width: 100%;padding: 5px;flex-direction: column;}
+		.t1 table, .t2 table {width:650px;margin:0}
+		.inquiry {margin-left:0;padding-top: 3em;width: 650px;}
+		.inquiry table{width: 640px;}
+		
+		.review_detail {margin:2em 0;}
+		.review_detail table {width: 600px;}
+		.slid, .slid a {left: 48%};
+	}
+	/*모바일 width:639px 미만*/
+	@media screen and (max-width:639px){
+		.right{width: 100%;padding: 5px;flex-direction: column;}
+		.t1 table, .t2 table {width:600px;margin:0}
+		.pro_name{width:10em;}
+		.inquiry {margin-left:0;padding-top: 3em;width: 600px;}
+		.inquiry table{width: 620px;}
+		.inquiry table th,.inquiry table td {padding:3px;}
+		.inquiry table tr:first-child td{padding:5px;}
+		.btn{bottom:-15%;}
+		
+		
+		.review_detail {margin:2em 0;}
+		.review_detail table {width: 550px;}
+		.slid, .slid a {left: 48%};
+	}

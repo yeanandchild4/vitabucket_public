@@ -1,0 +1,64 @@
+.list_1_2 > p {
+  margin-top: 20px;
+}
+
+.list_1_2 {
+  margin-bottom: 10px;
+}
+
+#review_list_2 { 
+  justify-content: end;
+}
+
+.list_2 > p {
+  font-weight: bold;
+  color: #FF8339;
+}
+
+/* 수정/삭제/취소 버튼 */
+.modal_btn > .detailDelete, .editBtn > .editCancle {
+  background-color: #f0f0f0;
+  color: black;
+}
+
+.editInput, .editBtn, .imgDelBtn {
+  display: none;
+}
+.modal_body > .textLengthWrap {
+  visibility: hidden;
+}
+
+
+.reviewBtn > a:nth-child(1) {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+.reviewBtn > a:nth-child(2) {
+  color: #FF8339;
+  font-weight: bold;
+}
+
+.modal_content > form > .review_pro_img {
+  margin-top: 10px;
+}
+
+/* 회원이 올린 리뷰 사진 */
+
+.reviewImg img {
+  width: 110px;
+}
+
+.reviewImg {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.reviewImg > div {
+  margin-right: 5px;
+}
+
+.imgDelBtn {
+  cursor: pointer;
+}

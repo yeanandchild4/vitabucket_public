@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vitabucket.web.mapper.Admin_productMapper">
+
+	<!-- 검색 -->    
+	<select id="pSearch" parameterType="HashMap" resultType="com.vitabucket.web.dto.ProductDTO">
+	    SELECT s.sub_cat_name, m.main_cat_name, p.* FROM VITA_PRODUCT p
+	    INNER JOIN VITA_SUB_CATEGORY s ON s.sub_cat_key = p.sub_cat_key
+	    INNER JOIN VITA_MAIN_CATEGORY m ON s.main_cat_key = m.main_cat_key		
+	    <where>   		
+	        <choose>
+	            <when test="search == 'pro_name' and search_key != null and search_key != ''">
+	                AND pro_name LIKE ('%'|| #{search_key} ||'%')
+	            </when>
+	            <when test="search == 'pro_key' and search_key != null and search_key != ''">
+	                AND pro_key LIKE ('%'|| #{search_key} ||'%')
+	            </when>
+	            <when test="sub_cat_key != null">
+	                AND p.sub_cat_key = #{sub_cat_key}
+	            </when>
+	        </choose>  
+	    </where>	
+	    ORDER BY pro_key	
+	</select>
+
+	
+	
+	<!-- 상품목록 불러오기  상품+하위카테고리 연결 -->
+	<select id="pro_cate_all" >
+		SELECT s.sub_cat_name,m.main_cat_name,p.pro_key, p.sub_cat_key, p.pro_name, p.pro_manufacturer, p.pro_price, p.pro_stock
+		FROM VITA_PRODUCT p
+		INNER JOIN VITA_SUB_CATEGORY s ON s.sub_cat_key = p.sub_cat_key
+		INNER JOIN VITA_MAIN_CATEGORY m ON s.main_cat_key = m.main_cat_key
+		order by pro_key
+	</select>	
+	
+	
+	<!-- 상품추가 -->
+    <insert id="pro_added" parameterType="com.vitabucket.web.dto.ProductDTO"> 
+      <selectKey keyProperty="pro_key" resultType="integer" order="BEFORE">
+         SELECT SEQ_PRODUCT_ADD.NEXTVAL FROM DUAL
+      </selectKey>
+		INSERT INTO VITA_PRODUCT(pro_key,sub_cat_key, pro_name,pro_manufacturer,pro_price,pro_stock, pro_comment,pro_best_by, pro_serving_size,
+	 	pro_servings_percont, pro_main_ing, pro_other_ing,pro_warnings, pro_allergy, pro_hit)
+		VALUES(#{pro_key},#{sub_cat_key}, #{pro_name},#{pro_manufacturer},#{pro_price},#{pro_stock}, #{pro_comment},#{pro_best_by}, #{pro_serving_size},
+	 	#{pro_servings_percont}, #{pro_main_ing}, #{pro_other_ing},#{pro_warnings}, #{pro_allergy},0)
+   </insert>
+	
+	<insert id="pro_added_img" parameterType="com.vitabucket.web.dto.Product_ImgDTO">
+        INSERT INTO VITA_PRODUCT_img (pro_img_key, pro_key,main_img ,img1, img2, img3, img4) 
+        VALUES (SEQ_PRODUCT_ADD_img.NEXTVAL, #{pro_key},#{main_img}, #{img1}, #{img2}, #{img3,jdbcType=VARCHAR}, #{img4,jdbcType=VARCHAR})
+	</insert>
+
+
+	<!-- 상품 상세정보 -->
+	<select id="get_proNum">
+		SELECT s.*,m.*,p.*
+		FROM VITA_PRODUCT p
+		INNER JOIN VITA_SUB_CATEGORY s ON s.sub_cat_key = p.sub_cat_key
+		INNER JOIN VITA_MAIN_CATEGORY m ON s.main_cat_key = m.main_cat_key
+		WHERE PRO_KEY=#{pro_key} order by pro_key
+	</select>
+
+
+	<!-- 상품 수정 -->
+	<update id="pro_update">
+		UPDATE VITA_PRODUCT 
+		SET pro_name=#{pro_name}, PRO_MANUFACTURER=#{pro_manufacturer},PRO_PRICE=#{pro_price},
+		    PRO_STOCK=#{pro_stock},PRO_COMMENT=#{pro_comment},PRO_BEST_BY=#{pro_best_by},
+		    PRO_SERVING_SIZE=#{pro_serving_size},PRO_SERVINGS_PERCONT=#{pro_servings_percont},
+		    PRO_MAIN_ING=#{pro_main_ing},PRO_OTHER_ING=#{pro_other_ing},
+		    PRO_WARNINGS=#{pro_warnings},PRO_ALLERGY=#{pro_allergy}        
+		WHERE pro_key=#{pro_key}
+	</update>
+
+
+</mapper>

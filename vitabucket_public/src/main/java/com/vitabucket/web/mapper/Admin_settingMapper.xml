@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vitabucket.web.mapper.Admin_settingMapper">
+
+
+	<!--회사정보 저장-->
+	<insert id="settSave" parameterType="com.vitabucket.web.dto.Vita_Vitabucket">
+		INSERT INTO VITA_VITABUCKET(CO_NAME,CEO_NAME,CO_ADDR,CO_TEL,CO_EMAIL,CO_FAX,BIN_NO,CO_ANNIVERSARY)
+		VALUES (#{co_name},#{ceo_name},#{co_addr},#{co_tel},#{co_email},#{co_fax},#{bin_no},#{co_anniversary})
+	</insert>
+	
+	
+
+   	<!-- 약관추가 -->
+    <insert id="terms_settingSave" parameterType="com.vitabucket.web.dto.Vita_Terms"> 
+      <selectKey keyProperty="terms_key" resultType="integer" order="BEFORE">
+          SELECT SEQ_TERMS.NEXTVAL FROM DUAL
+      </selectKey>
+		INSERT INTO VITA_TERMS(terms_key,terms_name,terms_content,terms_required)
+		 VALUES(#{terms_key},#{terms_name},#{terms_content},#{terms_required})
+    </insert>	
+	
+</mapper>

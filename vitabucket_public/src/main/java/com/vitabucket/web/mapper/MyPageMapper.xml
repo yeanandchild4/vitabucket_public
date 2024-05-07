@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vitabucket.web.mapper.MyPageMapper">
+
+<!-- 주문내역 -->
+	<!-- 주문내역 -->
+    <select id="totalOrderList">
+        SELECT to_key, unum, to_date, to_total, to_status, 
+        to_pro_cnt, to_pro_img, to_pro_name, to_refund_reason 
+        FROM vita_totalorder
+        WHERE unum=#{unum}
+        ORDER BY to_date DESC
+    </select>
+
+
+<!-- 주문상세내역 -->
+    <!-- 주문 상세 정보 -->
+    <select id="totalOrderDetail">
+    	SELECT *
+        FROM vita_totalorder
+        WHERE to_key=#{to_key}
+    </select>
+    
+    <!-- 주문 상세 상품 목록 -->
+    <select id="orderDetailList">
+    	SELECT d.*, i.main_img
+    	FROM vita_orderdetail d
+  		INNER JOIN vita_product_img i
+  		ON d.pro_key=i.pro_key
+    	WHERE to_key=#{to_key}
+    	ORDER BY od_key
+    </select>	
+    
+    
+<!-- 찜목록 -->    
+    <!-- 찜상품 목록 -->
+    <select id="wishList">
+		SELECT w.*, p.pro_name, p.main_img, p.pro_price, p.main_img 
+		FROM vita_wish w
+		INNER JOIN (
+		SELECT pro.pro_key, pro.pro_name, pro.pro_price, pro_img.main_img
+		FROM vita_product pro
+		INNER JOIN vita_product_img pro_img
+		ON pro.pro_key=pro_img.pro_key
+		) p
+		ON w.pro_key=p.pro_key
+		WHERE unum=#{unum}
+		ORDER BY wish_key DESC
+    </select>
+    
+    <!-- 찜상품 삭제 -->
+    <delete id="deleteWish">
+    	DELETE
+    	FROM vita_wish
+    	WHERE wish_key=#{wish_key}
+    </delete>
+    
+    
+<!-- 작성한 후기 -->    
+    <!-- 작성한 후기 내역 -->
+    <select id="reviewList">
+        SELECT b.*, pi.pro_name, pi.main_img
+        FROM vita_board b
+        INNER JOIN 
+        (SELECT p.pro_key, p.pro_name, i.main_img
+        FROM vita_product p
+        INNER JOIN vita_product_img i
+        ON p.pro_key=i.pro_key) pi        
+        ON b.pro_key=pi.pro_key
+        WHERE unum=#{unum} 
+        AND
+        board_type='review'
+        ORDER BY board_key DESC
+    </select>
+        
+    <!-- 리뷰 수정 -->
+    <update id="editReview">
+    	UPDATE vita_board
+    	SET board_content=#{board_content}
+    	WHERE board_key=#{board_key}
+    </update>
+    
+    <!-- 리뷰 삭제 -->
+    <delete id="deleteReview">
+    	DELETE FROM vita_board
+    	WHERE board_key=#{board_key}
+    </delete>
+    
+    
+<!-- 작성가능 후기 -->    
+    <!-- 작성가능 후기 내역 -->
+    <select id="unReviewList">
+   		SELECT di.*, t.to_date
+   		FROM (
+   		SELECT d.od_key, d.pro_name, d.pro_key, d.reviewd, d.to_key, i.main_img
+   		FROM vita_orderdetail d
+   		INNER JOIN vita_product_img i
+   		ON d.pro_key=i.pro_key) di
+   		INNER JOIN vita_totalorder t
+   		ON di.to_key=t.to_key
+   		WHERE unum=#{unum}
+   		AND	di.reviewd='0'
+   		ORDER BY to_date DESC
+    </select>
+    
+    <!-- 리뷰 저장 -->
+    <insert id="addReviewBoard">
+    	<selectKey keyProperty="board_key" resultType="integer" order="BEFORE">
+        	SELECT SEQ_VITA_BOARD.NEXTVAL FROM DUAL
+    	</selectKey>
+    	INSERT INTO vita_board
+    	VALUES (
+    	#{board_key},#{unum},#{pro_key},'review','review',SYSDATE,#{board_content}
+    	)
+    </insert>
+    
+    <!-- 주문 상세 상품 리뷰 업데이트 -->
+    <update id="updateReview">
+    	UPDATE vita_orderdetail
+    	SET reviewd='1'
+    	WHERE od_key=#{od_key}
+    </update>
+    
+    
+<!-- 개인문의 -->
+	<!-- 문의 목록 -->
+    <select id="inquiryList">
+        SELECT b.*, p2.pro_name, p2.main_img FROM vita_board b 
+		INNER JOIN (SELECT p.pro_key, p.pro_name,i.main_img FROM vita_product p 
+		INNER JOIN vita_product_img i ON p.pro_key=i.pro_key) p2
+		ON b.pro_key=p2.pro_key
+		WHERE unum=#{unum} 
+		AND b.board_type='inquiry'
+		ORDER BY board_posted DESC
+    </select>
+    
+    <!-- 문의 답변  -->
+    <select id="comment">
+    	SELECT * 
+    	FROM vita_comment
+    	WHERE board_key=#{board_key}
+    </select>
+    
+    <!-- 문의 삭제 -->
+    <delete id="deleteInquiry">
+    	DELETE FROM vita_board
+    	WHERE board_key=#{board_key}
+    </delete>
+
+
+<!-- 개인정보수정 -->
+	<!-- 유저 정보 -->
+    <select id="getUserInfo">
+    	SELECT * FROM vita_customer
+    	WHERE unum=#{unum}
+    </select>
+    
+    <!-- 유저 배송지 정보 -->
+    <select id="getUserAddr">
+    	SELECT * FROM vita_address
+    	WHERE unum=#{unum}
+    </select>
+    
+    <!-- 유저 정보 수정 with 암호 -->
+    <update id="editUserInfoWithPwd">
+    	UPDATE vita_customer
+    	SET user_pwd=#{user_pwd}, user_phone=#{user_phone}
+    	WHERE unum=#{unum}
+    </update>
+    
+    <!-- 유저 정보 수정 without 암호 -->
+    <update id="editUserInfoWithoutPwd">
+    	UPDATE vita_customer
+    	SET user_phone=#{user_phone}
+    	WHERE unum=#{unum}
+    </update>
+    
+    
+    <!-- 유저 배송지 수정 without addr_key -->
+    <insert id="editUserAddrWithoutaddr_key">
+    	INSERT INTO vita_address
+    	(addr_key, unum, addr_name, addr_zipcode, addr, 
+    	addr_detail, addr_tel, addr_reference, whole_addr)
+    	VALUES
+    	(SEQ_VITA_ADDR.NEXTVAL, #{unum}, #{addr_name}, #{addr_zipcode}, #{addr},
+    	#{addr_detail}, #{addr_tel}, #{addr_reference}, #{whole_addr})
+    </insert>
+    
+    <!-- 유저 배송지 수정 with addr_key -->
+    <update id="editUserAddrWithaddr_key">
+    	UPDATE vita_address
+    	SET addr_zipcode=#{addr_zipcode}, addr=#{addr},
+    	addr_detail=#{addr_detail}, addr_tel=#{addr_tel},
+    	addr_reference=#{addr_reference},
+    	whole_addr = #{whole_addr}
+    	WHERE unum=#{unum}
+    </update>
+    
+    
+<!-- 첨부파일 -->    
+    <!-- 리뷰/문의 첨부파일 목록 -->
+    <select id="battachList">
+	   	SELECT * 
+	   	FROM vita_board_attach
+	   	WHERE board_key=#{board_key}
+	   	ORDER BY b_attach_key DESC
+    </select>
+    
+    <!-- 첨부파일 저장 -->
+    <insert id="addBattach">
+    	INSERT INTO vita_board_attach
+    	VALUES (
+    	SEQ_VITA_BOARD_ATTACH.NEXTVAL, #{board_key},#{fname},#{savedfname}
+    	)
+    </insert>
+    
+    <!-- 첨부파일 하나 삭제 -->
+    <delete id="deleteBattach">
+    	DELETE FROM vita_board_attach
+    	WHERE b_attach_key=#{b_attach_key}
+    </delete>
+    
+    <!-- 첨부파일 전체 삭제 -->
+    <delete id="deleteBattachAll">
+		DELETE FROM vita_board_attach
+		WHERE board_key=#{board_key}
+    </delete>
+</mapper>

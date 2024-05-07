@@ -1,0 +1,58 @@
+.infomodify_container > main{
+    margin-left:3rem;
+    margin-right: 3rem;
+}
+
+#title {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mypage_container > .infomodify_container {
+    margin: 0 auto;
+}
+
+.infomodify_container .modify{
+    width: 550px;
+    margin: 0 auto;
+    padding-bottom: 130px;
+}
+
+.line{
+    border-bottom: 2px solid rgb(51, 51, 51);
+}
+
+#form{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+#form > .box {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.box > div {
+    width: 139px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#form input {
+    width: 405px;
+    height: 55px;
+    padding: 5px 0 5px 10px;
+    border-radius: 4px;
+    border: 1px solid #d9d6d6;
+    color: #383838;
+    background-color: #ffffff;
+    font-size: 16px;
+}
+
+#confirmBtn {
+    margin: 0 auto;
+}

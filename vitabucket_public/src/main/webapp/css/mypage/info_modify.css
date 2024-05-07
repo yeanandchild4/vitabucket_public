@@ -1,0 +1,156 @@
+body,html{
+    margin:0; height: 100%;
+}
+a{
+    text-decoration-line: none;
+}
+
+#title {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.info_container > main{
+    margin-left:3rem;
+    margin-right: 3rem;
+}
+
+.mypage_container > .info_container {
+    margin: 0 auto;
+}
+
+.info_container > .regist{
+    max-width: 550px;
+    margin: 0 auto;
+    padding-bottom: 130px;
+}
+
+.addline{
+    border-bottom: 2px solid rgb(51, 51, 51);
+}
+
+#addForm{
+    margin-top: 50px;
+}
+
+
+.info_container .box{
+    position: relative;
+       margin-bottom: 5em; 
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    padding: 10px 20px;
+    display: flex;
+}
+
+.info_container .box_addr{
+     position: relative;
+       margin-bottom: 5em;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-evenly;
+    flex-wrap: nowrap; 
+    flex-direction: column;
+    padding: 10px 20px;
+}
+
+.info_container .box p{
+    text-align: left;
+    padding-left: 0.5em;
+    font-size: small;
+}
+
+.info_container .naming span{
+    font-size: small;
+    color: crimson;
+    margin-right: 3px;
+}
+
+.info_container .checkBtn{
+    margin: auto 0;
+    width: 100px;
+    height: 56px;
+    background-color: white;
+    border-radius: 4px;
+    border: 1px solid gray;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.addr-item{
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    
+}
+
+.zipcodebtn{
+    margin: auto 0;
+    width: 100px;
+    height: 56px;
+    background-color: white;
+    border-radius: 4px;
+    border: 1px solid gray;
+    margin-left: 1px;
+       margin-top: 0;
+       margin-left: 5px;
+    
+} 
+
+.che{
+    font-size: small;
+    color:red;
+    margin-top: 3px;
+}
+.info_container .contents{
+  width: 405px;
+  height: 55px;
+  box-sizing: border-box;
+  padding: 5px 0 5px 10px;
+  border-radius: 4px;
+  border: 1px solid #d9d6d6;
+  color: #383838;
+  background-color: #ffffff;
+  font-size: 16px;
+}
+
+.contents:focus{
+    outline: none !important;
+    border-color:#FFA500;
+}
+
+.info_container .addbtn{
+    margin: 0 auto;
+       width: 100%;
+       display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+       border-top: 2px solid rgb(247, 247, 247);
+       padding-bottom: 40px;
+}
+
+#dobtn{
+    width:270px;
+    height: 55px;
+    text-align: center;
+    background-color: #FFA500;
+    color:white;
+    border-radius: 4px;
+    border:none;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.info_container .checkBtnWrap{
+    margin-top: 17px;
+}
+
+.mdiv{
+    margin: auto 0;
+    width: 100px;
+    height: 56px;
+}

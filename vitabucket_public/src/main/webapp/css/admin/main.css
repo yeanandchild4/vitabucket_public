@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+	/*전체주문통계*/
+	h2{margin-bottom: 5em;text-align: center;font-size: 2em;}
+	
+	/*content 전체를 감싸고 있는 section*/
+	section.contents{margin:5% 10px; flex-direction: column;align-items: center}
+	
+	/*content*/
+	.cons{padding: 5px 20px;margin-top: 5%;display: flex;}
+	.cons>div:first-child{margin-right: 5em;}
+	.cons>table{width:70%;}
+	table{font-size: 15px ;width: 500px;text-align: center;}
+	td{width: 7em;}
+	
+	/*현황판 제목*/
+	h3{text-align: left;margin-bottom: 20px;}
+	h3::before{display: inline-block;width: 5px;height: 15px; background: goldenrod;content: '';margin:0 0.5em;}    
+	
+	/*해당 관리페이지 이동버튼*/
+	h3 span[onclick]{cursor: pointer;color: #555;margin:0;float: right;border:1px dashed lightcoral;padding: 2px 5px;border-radius: 10px;}
+	h3 span[onclick]:hover{background-color: lightsalmon;color: #fff;}
+
+	/*클레임*/
+	.etc th{width: 40%;}
+	.etc div{width:15em;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;text-align: left;}
+	
+	
+/*일반 태블릿 width:1024px 미만~ 640px 이상*/	
+	@media screen and (min-width:640px) and (max-width:1023px){
+		.cons{display: flex;}
+		.cons table {width: 300px;}
+		.etc th{width: 60%;}
+		.etc div {width: 7em;}
+	}
+
+
+/*모바일 width:639px 미만*/
+	@media screen and (max-width:639px){
+		section.contents{display: flex;flex-direction: column;flex-wrap: wrap;margin:0;min-height: 600px;}
+		h2{margin-bottom: 1em;}
+		.cons{display: flex; flex-direction: column;margin-top: 0;}
+		.cons>div{padding:0 2em;}
+		.cons>div:first-child{margin:1em 0 2em;}
+		h3{margin-bottom:0.2em;text-align: justify;margin: 1em 0 0.2em;}
+		h3::before{display: inline-block;width: 3px;height: 10px;content: '▶';margin-right:0.8em;color: cadetblue;background: 0;}
+		h3 span[onclick]{margin-bottom: 3px;}    
+	}

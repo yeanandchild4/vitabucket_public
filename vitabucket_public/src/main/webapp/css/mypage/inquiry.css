@@ -1,0 +1,32 @@
+.list_2 > dl > span , .list_2 > p {
+    font-weight: bold;
+}
+
+.list_2 > p {
+    font-weight: bold;
+    color: #FF8339;
+}
+.list_1_1 {
+    justify-content: flex-start;
+}
+
+.list_1_2 > dt {
+    margin-right: 10px;
+}
+
+.list_1_2 {
+    margin-bottom: 10px;
+}
+
+.list_1_2 > p {
+    margin-top: 20px;
+}
+
+.modal_btn > .deleteInBtn {
+    background-color: #f0f0f0;
+    color: black;
+}
+
+.modal_content > .inquiry_pro_img {
+    margin-top: 10px;
+}

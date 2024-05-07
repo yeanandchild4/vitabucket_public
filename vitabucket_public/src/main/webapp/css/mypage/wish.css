@@ -1,0 +1,16 @@
+.list_1_1 {
+    justify-content: space-between;
+}
+
+.list_2 > button {
+    width: 100px;
+    height: 40px;
+    font-size: small;
+}
+
+/* 수정버튼 */
+
+.list_2 > .inactiveBtn {
+    background-color: #f0f0f0;
+    color: black;
+}

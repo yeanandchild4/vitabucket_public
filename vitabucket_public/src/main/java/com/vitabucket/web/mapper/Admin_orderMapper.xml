@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vitabucket.web.mapper.Admin_orderMapper">
+
+	<!-- 검색 -->    
+	<select id="oSearch" parameterType="HashMap" resultType="com.vitabucket.web.dto.TotalOrder">
+	    SELECT * FROM VITA_TOTALORDER 
+	    <where>   		
+	        <choose>
+	            <when test="search =='to_name'">
+	                AND to_name LIKE ('%'|| #{search_key} ||'%')
+	            </when>
+	            <when test="search =='to_pro_name'">
+	                AND to_pro_name LIKE ('%'|| #{search_key} ||'%')
+	            </when>
+	            <when test="search =='to_key'">
+	                AND to_key LIKE ('%'|| #{search_key} ||'%')
+	            </when>
+	            <when test="search =='to_date'">
+	                AND to_date LIKE ('%'|| #{search_key} ||'%')
+	            </when>
+	        </choose>  
+	    </where>		
+	</select>
+	
+	<!-- 배송정보 수정 -->
+	<update id="detail_edit">
+		UPDATE VITA_TOTALORDER	SET TO_STATUS=#{to_status} WHERE TO_KEY=#{to_key}
+	</update>	
+</mapper>

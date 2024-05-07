@@ -1,0 +1,16 @@
+.list_1_1 {
+    justify-content: space-between;
+}
+
+.list_1_2 > dt {
+    margin-right: 10px;
+}
+
+.list_2 > span {
+    font-weight: bold;
+}
+
+.list_2 > p > a {
+    font-weight: bold;
+    color: #FF8339;
+}

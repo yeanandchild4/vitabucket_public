@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vitabucket.web.mapper.ProductMapper">
+	<!-- all -->
+	<select id="getAllPdList">
+		SELECT * FROM vita_product ORDER BY pro_key
+	</select>
+	<select id="getAllPd_bestList">
+		SELECT * FROM vita_product ORDER BY pro_hit DESC
+	</select>
+	<select id="getAllPd_lowestList">
+		SELECT * FROM vita_product ORDER BY pro_price
+	</select>
+	<select id="getAllPd_highestList">
+		SELECT * FROM vita_product ORDER BY pro_price DESC
+	</select>
+	
+	<!-- best -->
+	<select id="getBestPdList">
+		SELECT * FROM vita_product WHERE pro_hit>=30 ORDER BY pro_key
+	</select>
+	<select id="getBestPd_bestList">
+		SELECT * FROM vita_product WHERE pro_hit>=30 ORDER BY pro_hit DESC
+	</select>
+	<select id="getBestPd_lowestList">
+		SELECT * FROM vita_product WHERE pro_hit>=30 ORDER BY pro_price
+	</select>
+	<select id="getBestPd_highestList">
+		SELECT * FROM vita_product WHERE pro_hit>=30 ORDER BY pro_price DESC
+	</select>
+	
+	<!-- search -->
+	<select id="getSearchPdList">
+		SELECT * FROM
+		(SELECT * FROM vita_product 
+		WHERE pro_name LIKE '%'||#{search}||'%'
+		OR pro_manufacturer LIKE '%'||#{search}||'%')t1 
+		ORDER BY pro_key
+	</select>
+	<select id="getSearchPd_bestList">
+		SELECT * FROM 
+		(SELECT * FROM vita_product 
+		WHERE pro_name LIKE '%'||#{search}||'%'  
+		OR pro_manufacturer LIKE '%'||#{search}||'%' )t1 
+		ORDER BY t1.pro_hit DESC
+	</select>
+	<select id="getSearchPd_lowestList">
+		SELECT * FROM 
+		(SELECT * FROM vita_product 
+		WHERE pro_name LIKE '%'||#{search}||'%'  
+		OR pro_manufacturer LIKE '%'||#{search}||'%' )t1 
+		ORDER BY t1.pro_price
+	</select>
+	<select id="getSearchPd_highestList">
+		SELECT * FROM 
+		(SELECT * FROM vita_product 
+		WHERE pro_name LIKE '%'||#{search}||'%'  
+		OR pro_manufacturer LIKE '%'||#{search}||'%' )t1 
+		ORDER BY t1.pro_price DESC
+	</select>
+	
+	
+	<!-- category -->
+	<select id="getMainCate">
+		SELECT * FROM vita_main_category WHERE main_cat_key=#{main}
+	</select>
+	<select id="getSubCate">
+		SELECT * FROM vita_sub_category WHERE sub_cat_key=#{sub}
+	</select>
+	<select id="getSubCate_">
+		SELECT * FROM vita_sub_category WHERE main_cat_key=#{main}
+	</select>
+	<select id="mainCates">
+		SELECT * FROM vita_main_category
+	</select>
+	<select id="subCates">
+		SELECT * FROM vita_sub_category
+	</select>
+	
+	<!-- MainCategory -->
+	<select id="getMainCatePdList">
+		SELECT pd.*
+		FROM vita_product pd INNER JOIN vita_sub_category cate ON pd.sub_cat_key=cate.sub_cat_key 
+		WHERE cate.main_cat_key=#{main_cat_key} 
+		ORDER BY pro_key
+	</select>
+	<select id="getMainCatePd_bestList">
+		SELECT pd.*
+		FROM vita_product pd INNER JOIN vita_sub_category cate ON pd.sub_cat_key=cate.sub_cat_key 
+		WHERE cate.main_cat_key=#{main_cat_key} 
+		ORDER BY pro_hit DESC
+	</select>
+	<select id="getMainCatePd_lowestList">
+		SELECT pd.*
+		FROM vita_product pd INNER JOIN vita_sub_category cate ON pd.sub_cat_key=cate.sub_cat_key 
+		WHERE cate.main_cat_key=#{main_cat_key} 
+		ORDER BY pro_price
+	</select>
+	<select id="getMainCatePd_highestList">
+		SELECT pd.*
+		FROM vita_product pd INNER JOIN vita_sub_category cate ON pd.sub_cat_key=cate.sub_cat_key 
+		WHERE cate.main_cat_key=#{main_cat_key} 
+		ORDER BY pro_price DESC
+	</select>
+	
+	<!-- SubCategory -->
+	<select id="getSubCatePdList">
+		SELECT * FROM vita_product WHERE sub_cat_key=#{sub_cat_key} ORDER BY pro_key
+	</select>
+	<select id="getSubCatePd_bestList">
+		SELECT * FROM vita_product WHERE sub_cat_key=#{sub_cat_key} ORDER BY pro_hit DESC
+	</select>
+	<select id="getSubCatePd_lowestList">
+		SELECT * FROM vita_product WHERE sub_cat_key=#{sub_cat_key} ORDER BY pro_price
+	</select>
+	<select id="getSubCatePd_highestList">
+		SELECT * FROM vita_product WHERE sub_cat_key=#{sub_cat_key} ORDER BY pro_price DESC
+	</select>
+	
+	<!-- pdDetail -->
+	<select id="getPdDetail">
+		SELECT * FROM vita_product WHERE pro_key=#{pro_key}
+	</select>
+	<update id="hitUp">
+		UPDATE vita_product SET pro_hit=pro_hit+1 WHERE pro_key=#{pro_key}
+	</update>
+	<select id="getBoard">
+		SELECT * FROM vita_board WHERE pro_key=#{pro_key}
+	</select>
+	<insert id="addInquiry">
+		INSERT INTO vita_board (board_key, unum, pro_key, board_type, board_title, board_posted, board_content) 
+		VALUES (SEQ_VITA_BOARD.NEXTVAL, #{unum}, #{pro_key}, #{board_type}, #{board_title}, #{board_posted}, #{board_content})
+	</insert>
+	<select id="getAttach">
+		SELECT * FROM vita_board_attach WHERE board_key=#{board_key}
+	</select>
+	
+	<!-- customer -->
+	<select id="getCustomer">
+		SELECT * FROM vita_customer WHERE unum=#{unum}
+	</select>
+	
+	
+	<!-- comment result -->
+	<select id="comm_result">
+		SELECT 
+		    CASE 
+		        WHEN COUNT(*) = 1 THEN 1
+		        ELSE 0
+		    END
+		FROM 
+		    vita_comment  
+		WHERE 
+		    board_key = #{board_key}
+	</select>
+	
+	<select id="getComment">
+		SELECT * FROM vita_comment WHERE board_key=#{board_key}
+	</select>
+	
+	<!-- wish -->
+	<select id="checkWish">
+		SELECT 
+		    CASE 
+		        WHEN COUNT(*) = 1 THEN 1
+		        ELSE 0
+		    END
+		FROM 
+		    vita_wish  
+		WHERE 
+		    unum = #{unum} AND pro_key = #{pro_key}
+	</select>
+	
+	
+	<insert id="addWish">
+		INSERT INTO vita_wish (wish_key, unum, pro_key) 
+		VALUES (SEQ_VITA_WISH.NEXTVAL, #{unum}, #{pro_key}) 
+	</insert>
+	
+	<delete id="delWish">
+		DELETE vita_wish WHERE unum=#{unum} AND pro_key=#{pro_key}
+	</delete>
+	
+	<!-- img -->
+	<select id="getImg">
+		SELECT * FROM vita_product_img WHERE pro_key=#{pro_key}
+	</select>
+</mapper>

@@ -1,0 +1,69 @@
+@charset "UTF-8";
+
+	/*menu부분 tab 선택한 것*/
+	.menu ul li:nth-child(1){background-color:#888;color:#fff;}
+
+	.right section{display: flex;align-items: center;}
+
+	.t1,.t2{padding: 1em;}
+
+	/*회원검색 부분*/
+	.t1 table{width: 50em;}
+	.t1 table th{width:25%;}
+	.t1 table td{padding-left:2em;}
+	
+	.nopadding{padding-left: 5px;width:21.5em;}
+	.nopadding select{width: 10em;padding:0.1em;}
+	.nopadding input{width:15em;padding:0.1em;}
+	
+	/*회원목록 부분*/
+	h3{margin-bottom:0;}
+	.t2,.t2 table{width: 70em;}
+	.t2 table{text-align: center;}	
+	.t2 table .wid_t{width:10em}
+
+	/*회원추가*/	
+	.member_add{border: 0;width: 7em;padding: 0.5em;}
+	.member_add button{float: right;margin:1em;}
+	
+	/*회원 상세정보*/
+	#m_detail{padding: 10em 5em 0;}
+	#memb_detail{font-size: 15px;}
+	#memb_detail table{width:40em;}
+	#memb_detail table th, #memb_detail_t td{padding: 1em;}
+	#memb_detail table th{width:40%;}
+	#memb_detail table td{text-align: left;padding-left:1em;}
+	#memb_detail table td[onclick]{font-weight: bold;color:#888;background-color:cornsilk;}
+	#memb_detail table td[onclick]:hover{color: red;background-color: lavender;font-size:1.3em;transition: 0.3s;transition-duration: 0.2s;}
+	#memb_detail table td[onclick] span{color: red;font-size: 1.2em;}
+	
+/*-----------------------------------------*/
+
+
+/*일반 태블릿 width:1024px 미만~ 640px 이상*/
+	@media screen and (min-width:640px) and (max-width:1023px){		
+		h2,h3,h4{padding:5px;}
+		.right {padding: 5px;width: 800px;margin: 0 auto;}
+		.t2 table {width: 100%;}
+		.t1,.t2{padding: 0;width: 100%;}
+		.right section {flex-direction: column;align-items: normal}
+		#m_detail {padding: 3em 20%;}
+		#memb_detail{font-size: 12px;}
+	}
+	
+	/*모바일 width:639px 미만*/
+	@media screen and (max-width:639px){
+		h2,h3,h4{padding:5px;}
+		.right{padding:0px;width:580px;margin:0 auto}
+		.right div{padding:0px}
+		.t1,.t2{padding: 0;}
+		.t2,.t1 table,.t2 table {width: 570px;}
+		
+		.right section {align-items: normal;padding-left: 5px;}
+		
+		.member_add button {margin: 1.2em 0 0;}
+		.right section {flex-direction: column;}
+		#m_detail {padding: 1em 0;}
+		#memb_detail{font-size: 12px;padding-left: 7%;}
+		
+	}

@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+	/*menu부분 tab 선택한 것*/
+	.menu ul li:nth-child(2){background-color:#888;color:#fff;}
+	.left ul li:first-child{background-color: #fff;color: #888;}
+	
+	.right{width: 60%;}
+	
+	/*카테고리 등록*/	
+	h2{text-align: left;margin:1em 0}
+	#cate_form th,#cate_form td{padding: 0.5em;border-bottom: 1px solid #999;border-top: 1px solid #999}
+	#cate_form th{width: 30%;}
+	
+	select{width:12em;padding: 2px;margin-right: 5px;}
+	
+	/*카테고리 목록*/
+	.main_cate{cursor: pointer;}
+	
+	.admin{display: flex;padding: 1em;align-items: center;}
+	.cate{width: 500px;padding: 1em;}
+	
+	.t2 ul li{border-top:1px solid #888; padding: 0.5em 1em;}
+	.t2 ul li:last-child{border-bottom:1px solid #888;}
+	.t2 a{color: #333;font-weight: 600;display: inline-block;}
+	.t2 .list li div{display: inline-block;text-align: right;}
+	.t2 .list li div span{color: burlywood;margin-left: 5px;}
+	.t2 .list li button{margin-right: 1em;border-radius: 7px;border: 1px solid azure;background-color: palevioletred;color: #fff;}
+	
+	.t2 .list li dl{display: none;padding-left: 5em;}	
+	.t2 .list li dt{margin-bottom: 1em;font-weight: 550;}
+	
+	/*카테고리 수정*/
+	#cate_edit{width:40%;}
+	#edit_form {display: flex; flex-direction: column; align-items: center; justify-content: center;}
+	#edit_form th,#edit_form td{padding: 0.5em;border-bottom: 1px solid #999;border-top: 1px solid #999}
+	#edit_form th{width: 50%;}
+	#cate_edit div{margin-top: 1em;}
+	
+
+	/*일반 태블릿 width:1024px 미만~ 640px 이상*/
+	@media screen and (min-width:640px) and (max-width:1023px){
+		.right {width: 650px;margin: 0 auto;}	
+
+		#cate_form th,#cate_form td:nth-child(2){width:30%;}
+		select {width: 12.7em; padding: 2px;margin: 0 0 5px;}
+		
+		.admin {flex-direction: column;align-items: center;}
+		#edit_form {width: 90%};
+		
+	}
+
+
+	/*모바일 width:639px 미만*/
+	@media screen and (max-width:639px){
+		h2,h3,h4{padding:5px;}
+		
+		.right {width: 500px;margin: 0 auto;}		
+		.t1{width: 100%;}
+		#cate_form table,.list table{width: 100%;}
+		#cate_form th, #cate_form td {width: 30%;}
+		select {width: 12.7em; padding: 2px;margin: 0 0 5px;}
+		.admin {flex-direction: column;align-items: center;}
+		
+		#edit_form th {width: 30%;}
+		
+	}

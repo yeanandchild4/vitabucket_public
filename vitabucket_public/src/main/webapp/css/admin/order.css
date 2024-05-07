@@ -1,0 +1,98 @@
+@charset "UTF-8";
+	
+	/*menu부분 tab 선택한 것*/
+	.menu ul li:nth-child(4){background-color:#888;color:#fff;}
+	
+	.right{width: 60%}
+	.t1,.t2{margin: 2em 0;}
+	
+	/*주문 검색*/
+	.t1 #searchForm>table th{width: 30%;}
+	
+	/*주문목록*/
+	.t2{width: 100%}
+	.t2 table{width: 100%;text-align: center;}
+	.t_long{width: 8em;}
+	.t_proname{width: 15em;}
+	.order_detail table:first-child{width:75%;text-align: center;}
+	
+	.t2 table th,.t2 table td{padding: 1em;}
+	.t2 table td:nth-child(2){width:8em;}
+	img{width:50px;}
+	.total_price{float: right;}
+	
+	
+	/*주문상세*/
+	.order_detail h4{margin:1em 0}
+	.order_detail .basic_info{margin-bottom: 3em;}
+	.order_detail .basic_info table:first-child{width: 45%;}
+	.order_detail .basic_info table th{background-color: rgba(231, 204, 167,0.5);}
+	.basic_info{display: flex;align-items: center}
+	.order_detail table{margin:1em}
+	table.status{width: 30em;height: 5em;}
+	table.status th{width: 10em;background-color: rgba(255,129,59,0.5);}
+	table.status select{margin:0.5em 0;}
+	table.status select option[disabled]{margin-top:1em ;}
+	
+	
+	.pro_info table .total td:last-child{font-weight: bold;font-size: 1.2em;}
+	
+	
+	.delivery_info{width:25em;}
+	.delivery_info td{text-align: left;}
+	.delivery_info button{margin-left: 7.5em;}
+	
+	
+	.addr_refun{display: flex;}
+	.addr_refun div{padding: 1em;}
+	
+	table.addr{width: 450px;padding: 1em;}
+	table.addr th{width:6em}
+	table.addr td{text-align: left;}
+	
+	.refund{width: 15em;margin: 1em 0 0 0.5em;padding: 0.5em;border: 1px solid rgb(224, 224, 224);height: 10em;box-shadow:2px 2px rgb(224, 224, 224);}
+	.btn{margin-top: 5em;text-align: center;width: 80%;}
+	.btn button:first-child{margin-right: 1em;}
+	
+/*------------------------*/	
+
+
+	/*일반 태블릿 width:1024px 미만~ 640px 이상*/
+	@media screen and (min-width:640px) and (max-width:1023px){	
+		h2,h3,h4{padding:5px;}
+		.right {width:75%;padding: 0 10px;}
+		.right>div{padding:0;;}
+		
+		.t2 table {width:99%;}
+		.t_proname{width: 15%;}
+		
+	
+		#scrollbtn{width:40px;}
+		#scrollbtn img{width:100%;}
+		
+		.basic_info,.addr_refun{flex-direction: column;align-items: normal;}
+		.order_detail .basic_info table:first-child {width:90%;}
+		.t2 table th, .t2 table td {padding:5px;}
+
+	}
+	
+	
+	/*모바일 width:639px 미만*/
+	@media screen and (max-width:639px){
+		/*취소/교환/반품/환불 메뉴부분 글자 크기 조정*/
+		.left ul li.li_etc{font-size: 0.9em;}
+		
+		h2,h3,h4,.pro_admin>span{padding:5px;}
+		.right{padding:5px;width:100%;}
+		.right div{padding:0;}
+		
+		.t1,.t2{padding:0;}
+		.t1 table{position: relative;padding-bottom: 2em;}
+		.t1 .table_btn {position: absolute;top: 15px;right: -120px;z-index:0;}
+		
+		#scrollbtn{width: 30px;background: 0;box-shadow: none;top:85%;}
+		#scrollbtn a{background: #D2D2CE;margin-top: 1em;border-radius: 7px;}		
+		#scrollbtn img{width:100%;}
+	
+
+	}

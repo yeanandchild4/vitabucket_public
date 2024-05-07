@@ -1,0 +1,21 @@
+p{width: 20em;height: 10em;background: url(../images/admin/denied.png)no-repeat;background-size: contain;}
+
+h3{font-size: 3em;margin:0;padding: 0;}
+
+h4{box-shadow: 2px 2px #eee;padding: 0.5em;border: 2px dashed mediumvioletred;
+cursor: pointer;color: coral;font-weight: bolder; font-size: xx-large;transition: all 0.5s;}
+h4:hover{text-decoration: solid;border: 2px solid blue;color: cornflowerblue;
+;border-radius: 40%;box-shadow: 5px 5px #ddd;}
+body,div{display: flex;flex-direction: column;align-items: center;}
+div{margin:0;font-family: 'Bazzi';text-align: center;}
+
+
+
+
+
+@font-face {
+    font-family: 'Bazzi';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
